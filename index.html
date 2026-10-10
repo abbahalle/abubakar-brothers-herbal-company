@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#111111">
+
+    <title>ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#111111">
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">
+           ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED
+        </div>
+
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Shop</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="cart.html">Cart 🛒</a>
+            <a href="orders.html">
+            My Orders 📦
+            </a>
+
+            <a href="track-order.html">
+            Track Order
+            </a>
+
+            <a href="account.html">
+            Account 👤
+            </a>
+            <div id="user-menu"></div>
+            <button id="installBtn" style="display:none;">
+                📲 Install App
+            </button>
+        </nav>
+    </header>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <div class="hero-text">
+            <h1>WELCOME TO ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED</h1>
+
+            <p>
+                Discover quality products at affordable prices.
+                Shop with us today!
+            </p>
+
+            <button>Shop Now</button>
+        </div>
+
+        <div class="hero-image">
+            <img src="images/shirt.jpg" alt="Product">
+        </div>
+
+    </section>
+
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products">
+
+    <h2>Our Products</h2>
+
+    <div class="shop-controls">
+
+        <input
+            type="text"
+            id="search-input"
+            placeholder="Search products..."
+            oninput="filterProducts()"
+        >
+
+        <select
+            id="category-filter"
+            onchange="filterProducts()"
+        >
+            <option value="All">All Categories</option>
+            <option value="Shirts">Shirts</option>
+            <option value="Shoes">Shoes</option>
+            <option value="Trousers">Trousers</option>
+            <option value="Caps">Caps</option>
+            <option value="Other">Other</option>
+        </select>
+
+    </div>
+
+    <div
+        class="product-container"
+        id="product-container"
+    >
+    </div>
+
+</section>
+
+            <div class="product">
+                <img src="images/shirt.jpg" alt="Shirt">
+
+                <h3>Classic Shirt</h3>
+
+                <p>₦15,000</p>
+
+<button onclick="addToCart('Classic Shirt', 15000)">
+    Add to Cart
+</button>
+            </div>
+
+
+            <div class="product">
+                <img src="images/shirt.jpg" alt="Shirt">
+
+                <h3>Premium Shirt</h3>
+
+                <p>₦20,000</p>
+
+<button onclick="addToCart('Premium Shirt', 20000)">
+    Add to Cart
+</button>
+            </div>
+
+
+            <div class="product">
+                <img src="images/shirt.jpg" alt="Shirt">
+
+                <h3>Smart Shirt</h3>
+
+                <p>₦18,000</p>
+
+<button onclick="addToCart('Smart Shirt', 18000)">
+    Add to Cart
+</button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+            navigator.serviceWorker
+                .register("service-worker.js")
+                .then(() => {
+                    console.log("Service Worker registered successfully.");
+                })
+                .catch(error => {
+                    console.error("Service Worker registration failed:", error);
+                });
+         });
+       }
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js")
+            .then(() => console.log("Service Worker registered"))
+            .catch(error => console.log("Service Worker error:", error));
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,510 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Admin Dashboard - ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED Admin
+        </div>
+
+        <nav>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="admin.html">
+                Dashboard
+            </a>
+
+            <a href="index.html">
+                View Store
+            </a>
+
+            <button onclick="adminLogout()">
+                Logout 🔐
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ADMIN DASHBOARD -->
+
+    <section class="admin-section">
+
+        <h1>
+            Admin Dashboard 📊
+        </h1>
+
+
+        <!-- STATISTICS -->
+
+        <div class="admin-cards">
+
+
+            <!-- ORDERS -->
+
+            <div class="admin-card">
+
+                <h3>
+                    📦 Total Orders
+                </h3>
+
+                <h2 id="order-count">
+                    0
+                </h2>
+
+            </div>
+
+
+            <!-- SALES -->
+
+            <div class="admin-card">
+
+                <h3>
+                    💰 Total Sales
+                </h3>
+
+                <h2 id="total-sales">
+                    ₦0
+                </h2>
+
+            </div>
+
+
+            <!-- PRODUCTS -->
+
+            <div class="admin-card">
+
+                <h3>
+                    🛍️ Total Products
+                </h3>
+
+                <h2 id="admin-product-count">
+                    0
+                </h2>
+
+            </div>
+
+
+            <!-- CUSTOMERS -->
+
+            <div class="admin-card">
+
+                <h3>
+                    👥 Customers
+                </h3>
+
+                <h2 id="customer-count">
+                    0
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUICK ACTIONS -->
+
+        <div class="admin-actions">
+
+            <h2>
+                Quick Actions ⚡
+            </h2>
+
+            <div class="admin-action-buttons">
+
+                <a
+                    href="#product-management"
+                    class="continue-button"
+                >
+                    ➕ Add Product
+                </a>
+
+                <a
+                    href="#orders-management"
+                    class="continue-button"
+                >
+                    📦 View Orders
+                </a>
+
+                <a
+                    href="index.html"
+                    class="continue-button"
+                >
+                    🛍️ View Store
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT MANAGEMENT -->
+
+        <div
+            id="product-management"
+            class="admin-management"
+        >
+
+            <h2>
+                Product Management 🛍️
+            </h2>
+
+
+            <div class="product-form">
+
+                <input
+                    type="text"
+                    id="product-name"
+                    placeholder="Product Name"
+                >
+
+                <input
+                    type="number"
+                    id="product-price"
+                    placeholder="Price"
+                >
+
+                <select id="product-category">
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Shirts">
+                        Shirts
+                    </option>
+
+                    <option value="Trousers">
+                        Trousers
+                    </option>
+
+                    <option value="Shoes">
+                        Shoes
+                    </option>
+
+                    <option value="Accessories">
+                        Accessories
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
+                </select>
+
+                <input
+                    type="text"
+                    id="product-image"
+                    placeholder="Image path e.g. images/shirt.jpg"
+                >
+
+                <button
+                    onclick="addProduct()"
+                >
+                    Add Product
+                </button>
+
+            </div>
+
+
+            <div id="admin-products">
+
+                <!-- Products appear here -->
+
+            </div>
+
+        </div>
+
+
+        <!-- ORDERS MANAGEMENT -->
+
+        <div
+            id="orders-management"
+            class="admin-management"
+        >
+
+           
+<h2 class="orders-title">
+    Customer Orders 📦
+</h2>
+
+<div class="order-controls">
+
+    <input
+        type="text"
+        id="order-search"
+        placeholder="Search Order ID or Customer..."
+        oninput="filterAdminOrders()"
+    >
+
+    <select
+        id="order-status-filter"
+        onchange="filterAdminOrders()"
+    >
+
+        <option value="All">
+            All Orders
+        </option>
+
+        <option value="Pending">
+            Pending
+        </option>
+
+        <option value="Confirmed">
+            Confirmed
+        </option>
+
+        <option value="Shipped">
+            Shipped
+        </option>
+
+        <option value="Delivered">
+            Delivered
+        </option>
+
+    </select>
+
+</div>
+
+
+<div id="orders-container">
+
+    <!-- Orders appear here -->
+
+</div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                updateAdminDashboard();
+
+            }
+        );
+
+
+        function updateAdminDashboard() {
+
+            /*
+             * PRODUCTS
+             */
+
+            const products =
+                JSON.parse(
+                    localStorage.getItem(
+                        "products"
+                    )
+                ) || [];
+
+
+            const productCount =
+                document.getElementById(
+                    "admin-product-count"
+                );
+
+
+            if (productCount) {
+
+                productCount.textContent =
+                    products.length;
+
+            }
+
+
+            /*
+             * CUSTOMERS
+             */
+
+            const users =
+                JSON.parse(
+                    localStorage.getItem(
+                        "users"
+                    )
+                ) || [];
+
+
+            const customerCount =
+                document.getElementById(
+                    "customer-count"
+                );
+
+
+            if (customerCount) {
+
+                customerCount.textContent =
+                    users.length;
+
+            }
+
+
+            /*
+             * ORDERS
+             */
+
+            const orders =
+                JSON.parse(
+                    localStorage.getItem(
+                        "orders"
+                    )
+                ) || [];
+
+
+            const orderCount =
+                document.getElementById(
+                    "order-count"
+                );
+
+
+            if (orderCount) {
+
+                orderCount.textContent =
+                    orders.length;
+
+            }
+
+
+            /*
+             * SALES
+             */
+
+            const totalSales =
+                orders.reduce(
+                    function (
+                        total,
+                        order
+                    ) {
+
+                        return (
+                            total +
+                            (
+                                Number(
+                                    order.total
+                                ) || 0
+                            )
+                        );
+
+                    },
+                    0
+                );
+
+
+            const salesElement =
+                document.getElementById(
+                    "total-sales"
+                );
+
+
+            if (salesElement) {
+
+                salesElement.textContent =
+                    "₦" +
+                    totalSales.toLocaleString();
+
+            }
+
+        }
+
+    </script>
+
+<section class="admin-products">
+
+    <h2>
+        Manage Products 🛍️
+    </h2>
+
+    <div class="product-form">
+
+        <input
+            type="text"
+            id="product-name"
+            placeholder="Product Name"
+        >
+
+        <input
+            type="number"
+            id="product-price"
+            placeholder="Price"
+        >
+
+        <input
+            type="text"
+            id="product-category"
+            placeholder="Category"
+        >
+
+        <input
+            type="text"
+            id="product-image"
+            placeholder="Image path e.g. images/shirt.jpg"
+        >
+
+        <button
+            onclick="addProduct()"
+        >
+            Add Product
+        </button>
+
+    </div>
+
+    <div id="admin-products">
+    </div>
+
+</section>
+
+<button onclick="adminLogout()">
+    Logout
+</button>
+
+</body>
+
+</html>
+

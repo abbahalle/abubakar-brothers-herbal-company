@@ -1,0 +1,37 @@
+{
+  "name": "ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED",
+  "short_name": "ABUBAKAR & BROTHERS",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111111",
+  "description": "ABUBAKAR & BROTHERS HERBAL COMPANY LIMITED",
+  "icons": [
+    {
+      "src": "./images/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./images/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "./screenshots/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Desktop home screen"
+    },
+    {
+      "src": "./screenshots/screenshot-mobile.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "label": "Mobile home screen"
+    }
+  ]
+}
